@@ -22,17 +22,18 @@ function setup() {
 	mango1=new mango(1100,100,30);
 	mango2 = new mango(1200,200,50);
 	mango3 = new mango(1050,200,20);
-    mango4 = new mango(950,200,40);
-    mango5 = new mango(1030,130,35);
-    mango6 = new mango(1120,225,25);
-    mango7 = new mango(1120,180,20);
-    mango8 = new mango(1100,25,20);
+  mango4 = new mango(950,200,40);
+  mango5 = new mango(1030,130,35);
+  mango6 = new mango(1120,225,25);
+  mango7 = new mango(1120,180,20);
+  mango8 = new mango(1100,25,20);
 
 	treeObj=new tree(1050,580);
 	groundObject=new ground(width/2,600,width,20);
 
 	stone = new Stone(247,420,20);
-	//elastic = new Rubber();
+
+	elastic = new Rubber(this.stone, {x:247, y:420});
 
 	Engine.run(engine);
 
@@ -57,6 +58,8 @@ function draw() {
   
   stone.display();  
   groundObject.display();
+
+  elastic.display();
 
   drawSprites();
 }
