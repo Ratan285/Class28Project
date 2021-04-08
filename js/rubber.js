@@ -1,22 +1,23 @@
 class Rubber{
-constructor(bodyA,pointB){
+constructor(body,anchor){
 var options=  {
-    bodyA :bodyA,
-    pointB :pointB,
-    stiffness:0.003,
-    length:10
+    bodyA :body,
+    pointB :anchor,
+    stiffness:0.004,
+    length:5
 }
-this.pointB = pointB;
-this.body = Constraint.create(options);
-World.add(world, this.body);
+this.pointB = anchor;
+this.bodyA = body;
+this.launcher = Constraint.create(options);
+World.add(world, this.launcher);
 }
 fly(){
-    this.body.bodyA = null;
+    this.launcher.bodyA = null;
 }
 display(){
-    if(this.body.bodyA){
-        var pointA = this.body.bodyA.position;
-        var pointB = pointB
+    if(this.launcher.bodyA){
+        var pointA = this.bodyA.position;
+        var pointB = this.pointB;
         strokeWeight(4);
         line(pointA.x,pointA.y,pointB.x,pointB.y);
     }

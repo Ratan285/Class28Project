@@ -1,12 +1,12 @@
 
-const Engine = Matter.Engine;
+const Engine = Matter.Engine; 
 const World = Matter.World;
 const Bodies = Matter.Bodies;
 const Body = Matter.Body;
 const Render = Matter.Render;
 const Constraint=Matter.Constraint;
 
-var treeObj, stoneObj,groundObject, launcherObject;
+var treeObj,groundObject;
 var mango1,mango2, mango3, mango4,mango5,mango6,mango7,mango8;
 var world,boy,stone,elastic;
 
@@ -33,7 +33,7 @@ function setup() {
 
 	stone = new Stone(247,420,20);
 
-	elastic = new Rubber(this.stone, {x:247, y:420});
+	elastic = new Rubber(stone.body, {x:247, y:420});
 
 	Engine.run(engine);
 
@@ -44,6 +44,7 @@ function draw() {
   background(230);
   //Add code for displaying text here!
   image(boy ,200,340,200,300);
+  
   
 
   treeObj.display();
@@ -61,5 +62,32 @@ function draw() {
 
   elastic.display();
 
-  drawSprites();
+  detectCollision(stone, mango1);
+  detectCollision(stone, mango2);
+  detectCollision(stone, mango3);
+  detectCollision(stone, mango4);
+  detectCollision(stone, mango5);
+  detectCollision(stone, mango6);
+  detectCollision(stone, mango7);
+  detectCollision(stone, mango8);
+
+
+
 }
+function mouseDragged(){
+  Matter.Body.setPosition(stone.body,{x: mouseX,y:mouseY});
+}
+function mouseReleased(){
+  elastic.fly();
+}
+function detectCollision(lstone,lmango){
+   mangoBodyPosition = lmango.body.position;
+   stoneBodyPosition = lstone.body.position;
+   var distance = dist(stoneBodyPosition.x,stoneBodyPosition.y,mangoBodyPosition.x,mangoBodyPosition.y)
+   if(distance<=lmango.r+lstone.r){
+     Matter.Body.setStatic(lmango.body, false)
+   } 
+
+ 
+}
+
